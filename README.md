@@ -23,7 +23,8 @@ Sign up or log into your Azure Account using [Azure Portal](https://portal.azure
 * Add appropriate **Virtual Name**. 
 * Select **Region** geopraphically close to user location.
 * Select **Image** as **Windows 11 Pro** for this project. 
-* Choose **Size** as **B2ms** Standard or General Purpose. If not found in the drop down menu, click **See all sizes** and find in **B-Series**.
+* Choose **Size** as **B2ms** Standard or General Purpose. 
+  * If not found in the drop down menu, click **See all sizes** and find in **B-Series**.
 ###### Administrator account
 * Add **Username** and secure **Password**.
 ###### Inbound port rules
@@ -34,7 +35,7 @@ Sign up or log into your Azure Account using [Azure Portal](https://portal.azure
 ##### Finalising virtual machine 
 * Select **Review + Create** to initialise validation. 
 * Select **Create** button after validation has passed. 
-* A new page will show once the depolyment of the virtual machine is complete.
+* A new page will appear once the deployment of the virtual machine is complete.
 
 #### Connecting to Windows Virtual Machine
 ###### Connection set up in Azure portal
@@ -74,7 +75,7 @@ Sign up or log into your Azure Account using [Azure Portal](https://portal.azure
 * In Select backup devices window, **find and select backup file** in the previously saved file location.
 * **Press OK** to initilise the restore process, press OK again when prompted.
 ### Milestone 3: Migrate to Azure SQL Database
-#### Azure SQL Database set up 
+#### Azure SQL Database set up
 ##### SQL databases dashboard
 * Log in to your **Microsoft Azure Portal**. 
 * In the search menu type and select **SQL databases**.
@@ -224,3 +225,56 @@ Server group: \<Default\>
 #### Migration data validation
 * Ensure that the data from the local database in the virtual matches the database in the Azure cloud database server.
   * Systemically check that tables name and values have been migrated. 
+### Milestone 4: Data Backup and Restore
+#### On-premise Database Backup 
+##### Virtual Machine Backup 
+* Launch the **SQL Server Mangement Studio application (SSMS)**.
+* In Object Explorer, connect to **Localhost database server**. 
+* Right click the local database.
+* Path from **Tasks** to **Back Up...**. 
+* Back Up database window will appear. 
+  * Source: 
+    * Database: AdventureWorks2022
+    * Backup type: Full 
+    * Backup component: Database 
+  * Destination: 
+    * Back up to: Disk
+    * Path: C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\
+      * This is the default path for backup file in windows.
+  * Press OK to execute backup
+ * A new window will appear to show "T**he backup of database 'AdventureWorks2022' completed successfully.**"
+##### User Local Machine Backup 
+* In the virtual machine, use the file explorer application to **navigate to the Backup file**. 
+  * Or copy paste the path way into the Windows Search bar to find the file folder 
+* Right click and copy the file **"AdventureWorks2022.bak"**
+* Minimise the virual machine using the "_" icon at the top to return to user local machine. 
+* **Paste backup** file in a secure file location.
+### Blob Storage Backup
+##### Storage accounts dashboard
+* Log in to your **Microsoft Azure Portal**. 
+* In the search menu type and select **storage accounts**.
+###### Project details 
+* Select appropriate **Subscription**.
+* Create new **Resource Group**.
+###### Instance details 
+* Storage account name: "Relevant name"
+* Region: Closest to user location
+* Performance: Standard 
+* Redundancy: Geo-redundant storage (GRS)
+* Press review 
+###### Review 
+* Preview the details and scroll down 
+* Click **Create** 
+###### Upload backup to new container 
+* **Navigate** Storage accounts > "Storage account name" > Overview > Upload 
+* Upload blob 
+  * **Copy and drag the backup file** from the backup folder in the virtual machine to the drop window 
+  * Create new container
+    * Name: Appropriate **name**
+    * Anonymous access level: **Private (no anonymous access)**
+    * Click **Ok**
+  * **Upload** backup file to cloud.
+###### Restore Database on Development Environment 
+* Using the previous instructions create a new following environments: 
+  * Virtual Machine: Sandbox environment for testing feature
+  * In the virtual machine, download and install **SQL Server** and **SSMS** 

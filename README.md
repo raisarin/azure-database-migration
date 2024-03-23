@@ -277,4 +277,68 @@ Server group: \<Default\>
 ###### Restore Database on Development Environment 
 * Using the previous instructions create a new following environments: 
   * Virtual Machine: Sandbox environment for testing feature
-  * In the virtual machine, download and install **SQL Server** and **SSMS** 
+  * In Sadbox virtual machine:
+    * Download and install **SQL Server** and **SSMS**. 
+* Restore database from Backup file: 
+  * Login to user Azure portal, Storage account > Containers > "User container with backup file" 
+  * Right click and download to Sandbox windows into the SSM backup folder.
+  * Use the same process as before in **Create production database** to restore the database.
+  * Check the tables and data have been restored properly. 
+###### Development Environment Automated Backup
+* Launch **SSMS** application. 
+* In object Explorer, under Integration Services Catalogs, right click **SQL Server Agent (Agent XPs disbale)
+* Click **start** and **Yes** to start service. 
+* SQL Server Credential creation
+  * **Right click the server** in Object Explorer 
+  * Select **New Query**
+  * Copy and paste the code block below 
+  ``` 
+  CREATE CREDENTIAL YourCredentialName
+  WITH IDENTITY = 'Your Azure Storage Account Name',
+  SECRET = 'Access Key';
+  ```
+  * **Replace the following details** using information from the Azure storage details 
+    * Navigate to Azure portal > Storage accounts > "User storage account" > Security + networking > Access Keys
+    * YourCredentialName: "Name of backup"
+    * Your Azure Storage Account Name: "Copy and paste Storage account name"
+    * Access key: "Copy and paste Key"
+  * **Right Click then press Execute** on the code in SSMS
+    * A prompt will show "Commands completed successfully."
+    * In object Explorer > "User server" > Security > Credentials, the credential created will be present. 
+* In Object Explorer then Management, **Right click Maintenance Plan**. 
+* Select Maintence Plan Wizard.
+  * Information page, press next.
+  * Select Plan Properties
+    * Name: "Name of Maintenance Plan"
+    * Description: "Blank" 
+    * Run as: SQL Server Agent service account 
+    * Single schedule for the entire plan or no schedule 
+    * Schedule: Press Change 
+      * New job Schedule
+        * Schedule type: Recurring 
+        * Frequnecy Occurs: Weekly
+        * Press OK 
+    * Press **Next >**
+  * Select Maintenance Tasks 
+    * Select Back Up Database (Full)
+    * Press **Next >**
+  * Select Maintenance Task Order 
+    * Select Back Up Database (Full)
+    * Press **Next >**
+  * Define Back Up Database (Full) Task 
+    * General
+      * Database(s): AdventureWorks2022 
+      * Back up to: URL
+    * Destination: 
+      * SQL credential: "User created Credential" 
+      * Azure storage container: "Container in the user storage account"
+        * Azure portal > Storage accounts > "user storage account" > Data storage > Containers > "Container for backup" 
+      * Press **Next >**
+  * Select Report Options: 
+    * Press **Next >**
+  * Complete the Wizard 
+    * Press **Finish**
+  * Press Close when Status has updated to Success.
+* Right click and click **refresh Maintenance Plans**
+  * New a plan will appear.
+* Right click "User plan" and select **Exectue**

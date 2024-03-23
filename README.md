@@ -47,8 +47,8 @@ Sign up or log into your Azure Account using [Azure Portal](https://portal.azure
 * Search for **Remote Desktop Connection** in Start menu of the local desktop.
 * Drag and drop **.rdp** file into the Remote Desktop Connection application. 
 * Input the **credentials** of the virtual machine to gain access.
-#### SQL Server and SQL Server Management Studio (SSMS) installation in Virtual Machine
-##### Installation 
+#### SQL Server & SQL Server Management Studio (SSMS) installation in Virtual Machine
+##### Installation process
 * Use previous method to **connect** to Virtual Machine. 
 * Download **SQL Server Installer** from [Microsoft Download Centre](https://go.microsoft.com/fwlink/p/?linkid=2215158&clcid=0x809&culture=en-gb&country=gb "https://go.microsoft.com/fwlink/p/?linkid=2215158&clcid=0x809&culture=en-gb&country=gb").
 * Locate and run the **SQL Server installer**.
@@ -66,6 +66,12 @@ Sign up or log into your Azure Account using [Azure Portal](https://portal.azure
     * Authentication: **Windows Authentication**
 * Press **Connect** to add the database to the Object Explorer.  
 #### Create production database 
+* Download Micorsoft SQL Server database backup file called [AdventureWorks](https://aicore-portal-public-prod-307050600709.s3.eu-west-1.amazonaws.com/project-files/93dd5a0c-212d-48eb-ad51-df521a9b4e9c/AdventureWorks2022.bak "https://aicore-portal-public-prod-307050600709.s3.eu-west-1.amazonaws.com/project-files/93dd5a0c-212d-48eb-ad51-df521a9b4e9c/AdventureWorks2022.bak").
+* Copy the backup file to file location `C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup`. 
+* Right click on **Databases**. 
+* Choose **Restore Database**.
+* In Restore Database window, **select Device** then **click ...** for more options 
+* In Select backup devices window, **find and select backup file** in the previously saved file location.
+* **Press OK** to initilise the restore process, press OK again when prompted.
 
-
-https://aicore-portal-public-prod-307050600709.s3.eu-west-1.amazonaws.com/project-files/93dd5a0c-212d-48eb-ad51-df521a9b4e9c/AdventureWorks2022.bak
+### Milestone 3: Migrate to Azure SQL Database

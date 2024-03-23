@@ -2,6 +2,9 @@
 
 Provide insights into the virtual machine setup, SQL Server installation, and the creation of the production database
 
+## Azure Project Diagram 
+![image](./Images/Azure%20Project%20Diagram.png)
+
 ## Milestone 
 ### Azure Account Setup/Login
 Sign up or log into your Azure Account using [Azure Portal](https://portal.azure.com/ "https://portal.azure.com/")

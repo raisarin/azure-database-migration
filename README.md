@@ -1,10 +1,17 @@
-# azure-database-migration
+# Azure Database Migration
+Implementation of a cloud-based database system using the services from Micosoft Azure.
+<details>
+<summary><h1> Table of Content</h1></summary>
++ dkjfskd
+__dlfjsdlkfj
+</details>
 
-Provide insights into the virtual machine setup, SQL Server installation, and the creation of the production database
+## Description 
+Micosoft Azure provides plentiful and simple to use features. Virtual machine (VM) can be used to establish a production environment, the properties of the VM configured to meet the specification needs of the user. In the VM, application from Micosoft faciliate the migration, backups and restoration of on-premise SQL database. There are simulations that user can perform to verify the integrity and recovery features of on-presmise and cloud database. This project aims to produce a cloud-base database and test the core features provided.
 
 ## Azure Project Diagram 
 ![image](./Images/Azure%20Project%20Diagram.png)
-
+This UML Diagram provides a visual aid for understanding the flowchart of the project as there will multiple interdependent serivces. 
 ## Milestone 
 ### Azure Account Setup/Login
 Sign up or log into your Azure Account using [Azure Portal](https://portal.azure.com/ "https://portal.azure.com/")
@@ -19,7 +26,8 @@ Sign up or log into your Azure Account using [Azure Portal](https://portal.azure
 * Use create drop menu and choose **Azure virtual machine**. 
 
 ##### Create virtual machine 
-###### Project details
+###### Project 
+
 * Select appropriate **Subscription**.
 * Create and name new **Resource Group**. 
 ###### Instance details
@@ -477,9 +485,9 @@ ALTER ROLE db_datareader ADD MEMBER[new_user@yourdomain.com];
 * In the same connection, Right click the server
 * Click **Edit Connection**
 * Only change account field
-  * Drop menu and select Add an account
-  * Use the browser and new user credentials to continue
-  * Upon first login, set up a new password.
+  * Drop menu and select **Add an account**
+  * Use the browser and **new user credentials** to continue
+  * Upon first login, set up a **new password**.
 * Connect after verification has been done.
 * Test Read only Access
   * Right click any table under Tables

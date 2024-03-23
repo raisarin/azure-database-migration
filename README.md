@@ -373,3 +373,44 @@ Server group: \<Default\>
 * After the deployment is completed, in resources, a **new database is created**
 * Following instructions on [Azure Data Studio connection to Azure SQL Database](#azure-data-studio-connection-to-azure-sql-database) again to connect to new restored Azure SQL Database.
 * Check that the tables that the loss was performed have been recovered properly.
+### Milestone 6: Geo Replication and Failover
+#### Geo replciation Configuation 
+* Navigate to Azure portal > SQL Database
+* Select **Previously Restored database**
+* Under Data management, Click **Replicas**
+* Click **Create relica**
+  * Create SQL Database - Geo Replica
+    * Database details 
+      * Server: Click **Create new**
+        * Create SQL Database Server
+          * Server name: **Unique server name**
+          * Location: **Different from original server**
+          * Authentication method: Use SQL authentication 
+          * Server admin login: **New credentials**
+          * Password: **New credentials**
+          * Confirm password: **New credentials**
+          * Press **Review + create**
+        * Press **Create**
+
+#### Failover and Failback Test
+##### Failover group setup 
+* Navigate to Azure portal > SQL server
+* Select **Server with Restored database** 
+* Under Data management, select **Failover groups**
+* Click **Add Group**
+  * Failover group 
+    * Failover group name: **New group name**
+    * Server: **Select Secondary server**
+##### Testing
+* Newly added group will appear in the Failover groups
+* Click on the **New Failover group**
+  * New Failover group 
+    * **Failover** 
+      * Press **Failover icon**
+      * Press **Yes** in the Warning
+      * Observe the Roles of the Servers have swapped.
+    * **Failback**
+      * It is the same process as before
+      * Press **Failover icon**
+      * Press **Yes** in the Warning
+      * Observe the Roles of the Servers are reverted to the original.

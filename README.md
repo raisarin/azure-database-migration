@@ -7,6 +7,8 @@ Provide insights into the virtual machine setup, SQL Server installation, and th
 Sign up or log into your Azure Account using [Azure Portal](https://portal.azure.com/ "https://portal.azure.com/")
 
 ### Milestone 2: Setup production environment
+> [!NOTE]
+> Leave options as default if not mentioned
 
 #### Windows Virtual Machine setup 
 ##### Virtual machine dashboard
@@ -32,6 +34,11 @@ Sign up or log into your Azure Account using [Azure Portal](https://portal.azure
 * Select **Review + Create**, this will initialise validation. 
 * Once validation has passed, select **Create** button. 
 * A new page will show once the depolyment of the viraul machine is complete
+
+####
+
+
+
 #### SQL Server installation 
 
 #### Production database 

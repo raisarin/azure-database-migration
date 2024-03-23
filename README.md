@@ -1,17 +1,6 @@
 # Azure Database Migration
 Implementation of a cloud-based database system using the services from Micosoft Azure.
 
-## Table of Content
-* [Description](#description)
-* [Azure Project Diagram](#azure-project-diagram)
-* [Azure Account Setup](#azure-account-setup)
-* [Production Environment Setup](#production-environment-setup)
-* [Azure SQL Database Migration](#azure-sql-database-migration)
-* [Data Backup and Restore](#data-backup-and-restore)
-* [Disaster Recovery Simulation](#disaster-recovery-simulation)
-* [Geo Replication and Failover](#geo-replication-and-failover)
-* [Microsoft Entra Directory Integration](#microsoft-entra-directory-integration)
-
 ## Description
 Micosoft Azure provides plentiful and simple to use features. Virtual machine (VM) can be used to establish a production environment, the properties of the VM configured to meet the specification needs of the user. In the VM, application from Micosoft faciliate the migration, backups and restoration of on-premise SQL database. There are simulations that user can perform to verify the integrity and recovery features of on-presmise and cloud database. This project aims to produce a cloud-base database and test the core features provided.
 

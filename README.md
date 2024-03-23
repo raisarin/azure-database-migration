@@ -407,7 +407,7 @@ SECRET = 'Access Key';
   * Failover group
     * Failover group name: **New group name**
     * Server: **Select Secondary server**
-#### Test
+#### Testing
 * Newly added group will appear in the Failover groups
 * Click on the **New Failover group**
   * New Failover group 

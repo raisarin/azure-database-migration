@@ -8,12 +8,13 @@ Sign up or log into your Azure Account using [Azure Portal](https://portal.azure
 
 ### Milestone 2: Setup production environment
 > [!NOTE]
-> Leave options as default if not mentioned
+> The following set up is only for Windows 10 environment only and leave options as default if not mentioned.
 
 #### Windows Virtual Machine setup 
 ##### Virtual machine dashboard
-* Look and select for "Virtual Machines" in the search menu.
-* Use create drop menu and choose Azure virtual machine. 
+* In the search menu type and select **Virtual Machines**.
+* Use create drop menu and choose **Azure virtual machine**. 
+
 ##### Create virtual machine 
 ###### Project details
 * Select appropriate **Subscription**.
@@ -30,15 +31,41 @@ Sign up or log into your Azure Account using [Azure Portal](https://portal.azure
 * For **Select inbound ports** check the option **RDP (3389)**. 
 ###### Licensing 
 * Check the box to confirm eligibility for windows 10/11 license with multi-tenant hosting rights.
-###### Finalising virtual machine 
-* Select **Review + Create**, this will initialise validation. 
-* Once validation has passed, select **Create** button. 
-* A new page will show once the depolyment of the viraul machine is complete
+##### Finalising virtual machine 
+* Select **Review + Create** to initialise validation. 
+* Select **Create** button after validation has passed. 
+* A new page will show once the depolyment of the virtual machine is complete.
 
-####
+#### Connecting to Windows Virtual Machine
+###### Connection set up in Azure portal
+* In the search menu type and select **Virtual Machines**.
+* Select the name of **Virtual Machine** that has been created.
+* Press **Start** if the virtual machine has not been initialised.
+* Use the connect drop down menu to select **Connect**.
+* **Download RDP file** into local desktop.
+###### Connection in Windows desktop
+* Search for **Remote Desktop Connection** in Start menu of the local desktop.
+* Drag and drop **.rdp** file into the Remote Desktop Connection application. 
+* Input the **credentials** of the virtual machine to gain access.
+#### SQL Server and SQL Server Management Studio (SSMS) installation in Virtual Machine
+##### Installation 
+* Use previous method to **connect** to Virtual Machine. 
+* Download **SQL Server Installer** from [Microsoft Download Centre](https://go.microsoft.com/fwlink/p/?linkid=2215158&clcid=0x809&culture=en-gb&country=gb "https://go.microsoft.com/fwlink/p/?linkid=2215158&clcid=0x809&culture=en-gb&country=gb").
+* Locate and run the **SQL Server installer**.
+* Select **Basic** installation type.
+* Accept the **License Terms**.
+* Choose appropriate **install location**.
+* **Select install** to start the installation. 
+* **Download SSMS** using prompt shown in the installer.  
+* Use the **on-screen instructions** to install SSMS.
+##### Connecting SQL Server and SSMS
+* Start the **SSMS application**. 
+* Enter the **credentials** following the steps below.
+    * Server type: **Database Engine**
+    * Server name: "Name of virtual machine" or **Localhost**
+    * Authentication: **Windows Authentication**
+* Press **Connect** to add the database to the Object Explorer.  
+#### Create production database 
 
 
-
-#### SQL Server installation 
-
-#### Production database 
+https://aicore-portal-public-prod-307050600709.s3.eu-west-1.amazonaws.com/project-files/93dd5a0c-212d-48eb-ad51-df521a9b4e9c/AdventureWorks2022.bak

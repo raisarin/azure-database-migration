@@ -140,9 +140,9 @@ Server group: \<Default\>
 > * Enable **Selected Networks** to allow Virtual machine to connect to the server 
 
 * Click **Connect**
-##### SQL Server Schema Compare
+##### SQL Server Migration
 ###### Schema Extension
-* In Azure Studio Data Studio, find and click **Extension** icon in the left sidebar.
+* In Azure Studio Data Studio, find and click **Extensions** icon in the left sidebar.
 * Search and install **SQL Server Schema Compare**.
 * Click on Connection icon in the left sidebar. 
 * Right click and choose **Schema Compare** on the **local database server**.
@@ -158,5 +158,67 @@ Server group: \<Default\>
     * Database: name of Azure SQL Database
 * Click on **Compare button** on the top left to initialise comparison.   
 * Click **Apply button** on the top middle to apply the difference from local database (virtual machine) to cloud database (Azure).
-> [!NOTE] 
+> [!Important] 
 > This process only uploads the tables and structure of the database to the cloud **without the values or data**.
+#### SQL Data Migration
+##### Data Migration extension 
+* In Azure Studio Data Studio, find and click **Extensions** icon in the left sidebar.
+* Search and install **Azure SQL Migration**.
+* Click on Connection icon in the left sidebar. 
+* Right click and choose **Manage** on the **local database server**.
+* In the new windows, under General click **Azure SQL Migration**.
+* Click **Migrate to Azure SQL** 
+##### Migrate "user database" to Azure SQL
+* Step 1: Databases for assessment
+  * Choose **AdventureWorks2022** Database. 
+  * Click next.
+* Step 2: Assessment summary and SKU recommendations
+  * Click next after the assessment has finished.
+* Step 3: Target platform & assessment results 
+  * Select target type: Azure SQL Database. 
+* Step 4: Azure SQL target 
+  * Azure account: "User Azure account" 
+    * Link user account and follow authentication process.
+  > [!Note] 
+  > The following details in the next step should be filled automatically ensure they are correct. 
+
+  * Subscription: Choose relevant subcription of the database
+  * Location: Location of the database 
+  * Resource group: Group linked to database 
+  * Azure SQL Database Server: Databse Server for the data migration 
+  * Target user name: Login credentials of the server 
+  * Target password: Login credentials of the server
+  * Press **Connect** when details are correctly inputed.
+    * If done correctly, a prompt will show "Connection was success ful. Target databases found: (Number of database in the server)"
+  * Select the appropriate **Target database**
+  * Click **Next**
+* Step 5: Azure Database Migration Service
+  * Under **Azure Database Migration Service**, click **Create new** 
+    * Create Azure Database Migration Service
+      * Resource group: Click **Create new** under Resource group and **add appropriate name**
+      * Name: Add **Service Name**
+  * Set up integration runtime 
+    * Use the link provided to **download and install** the Mircosoft Integration Runtime Configuration Manager.
+    * Run the applicaiton.
+    * Copy and paste one of the Authentication key in the Register Integration Runtime. (Self-hosted) window 
+    * Click **Register** button. 
+      * "Self-hosted node is connected to the could service" will be shown in the window.
+    * Click **Test connection** button on the bottom right to verify connection. 
+    * Click **Done** button to return to previous window interface.
+  * Connection status: Text box will show the connection of the service.
+    * Press **Refresh** button to retry the connection. 
+  * Press **Next** button. 
+* Step 6: Data source configuration 
+  * User name: "Virtual machine\User"
+  * Password: "Virtual machine credentials"
+  * Table selection: Check the source and target database are correct
+    * Click the box under the select tables to edit number of tables.
+    * Select the necessary number of tables
+    * Press **Update** button the bottom right. 
+  * Press **Run validation** button on the bottom left to test the connectivity. 
+    * After the validation process has finish, press **Done**
+  * Click on **Next** button. 
+  * Press **Start migration** button. 
+* In **Migrations tab**, a new row will show the migration services and status. 
+* The migration status will show **Succeeded** when completed. 
+#### Migration data validation

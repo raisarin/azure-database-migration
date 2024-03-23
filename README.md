@@ -477,7 +477,7 @@ SECRET = 'Access Key';
   * Click **Create**
 #### New User Acess Configuration
 * Launch Azure Data Studio in production virtual machine 
-* Using the instructions in [Testing Microsoft Entra ID](#testing-microsoft-entra-id) with the admin credentials to gain access to the database.
+* Using the instructions in [Microsoft Entra ID Testing](#microsoft-entra-id-testing) with the admin credentials to gain access to the database.
 * Right click the database server.
 * Select **New Query**.
 * Copy, paste and edit the following code.

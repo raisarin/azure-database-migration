@@ -398,7 +398,7 @@ Server group: \<Default\>
 * Select **Server with Restored database** 
 * Under Data management, select **Failover groups**
 * Click **Add Group**
-  * Failover group 
+  * Failover group
     * Failover group name: **New group name**
     * Server: **Select Secondary server**
 ##### Testing
@@ -414,3 +414,76 @@ Server group: \<Default\>
       * Press **Failover icon**
       * Press **Yes** in the Warning
       * Observe the Roles of the Servers are reverted to the original.
+### Milestone 7: Microsoft Entra Directory Integration
+#### Configuration of Microsoft Entra ID for Azure SQL Database
+* Navigate to Azure portal > SQL server
+* Click **Primary database server**
+* Under Settings, click **Microsoft Entra ID**
+* Click **Set Admin**
+  * Microsoft Entra ID
+    * In the search bar **look up for the User**
+    * Check the User
+    * Click **Select** button
+* Click **Save**
+* Under Microsoft Entra admin, the added admin details will appear 
+#### Testing Microsoft Entra ID 
+* In **Production virtual machine**, launch **Azure Data Studio**
+* Add new connection
+  * Connection type: Microsoft SQL Server
+  * Input type: Parameters
+  * Server: "user-primary-database-server".database.windows.net
+      * Microsoft Azure > SQL databases > "User primary SQL database" > Overview
+      * Copy the server name.
+  * Authentication type: Microsoft Entra ID - Universal with MFA support
+  * Account: **New added user account**
+    * If user account not found, select add an account ..
+    * Use the prompt in the browser to verify the account.
+  * Database: "Restored SQL database"
+  * Encrypt: Mandatory (True)
+  * Trust server certificate: True
+  Server group: \<Default\>
+  * Name (optional): Name of database or Leave blank
+* Verfiy the tables and data can be access.
+#### DB Reader User
+##### Creating User Access
+* Navigate to Azure portal > Microsoft Entra ID
+* Click add user > Create new user
+  * Create new user
+    * Basics
+      * User principal name: "Name of the new user" @ "Choose appropriate email"
+      * Mail nickname: Derive from user principal name
+      * Display name: Name of the account
+      * Password: Copy auto-generated password
+      * Account enabled: Checked
+  * Press **Review + create**
+  * Click **Create**
+* Launch Azure Data Studio in production virtual machine 
+* Using the instructions in [Testing Microsoft Entra ID](#testing-microsoft-entra-id) with the admin credentials to gain access to the database.
+* Right click the database server.
+* Select **New Query**.
+* Copy, paste and edit the following code.
+>[!Important]
+> Only change user email in the brackets
+```
+CREATE USER [new_user@yourdomain.com] FROMEXTERNAL PROVIDER;
+ALTER ROLE db_datareader ADD MEMBER[new_user@yourdomain.com];
+```
+* Press **Run** icon
+* Message will show that "Commands completed successfully."
+#### Test User Access
+* In the same connection, Right click the server
+* Click **Edit Connection**
+* Only change account field
+  * Drop menu and select Add an account
+  * Use the browser and new user credentials to continue
+  * Upon first login, set up a new password.
+* Connect after verification has been done.
+* Test Read only Access
+  * Right click any table under Tables
+  * Click **Select Top 1000**
+  * Copy, past and edit following code.
+  ```
+  DELETE TOP (1)
+  FROM user_chosen_table_name
+  ```
+* A message will indicate "The DELETE permission was denied on the object".

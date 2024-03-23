@@ -73,5 +73,69 @@ Sign up or log into your Azure Account using [Azure Portal](https://portal.azure
 * In Restore Database window, **select Device** then **click ...** for more options 
 * In Select backup devices window, **find and select backup file** in the previously saved file location.
 * **Press OK** to initilise the restore process, press OK again when prompted.
-
 ### Milestone 3: Migrate to Azure SQL Database
+#### Azure SQL Database set up 
+##### SQL databases dashboard
+* Log in to your **Microsoft Azure Portal**. 
+* In the search menu type and select **SQL databases**.
+* Select **Create** a new database. 
+##### Create SQL Database 
+###### Project details 
+* Select appropriate **Subscription**.
+* Create and name new **Resource Group**. 
+###### Database details 
+* Add appropriate **Database Name**. 
+* Click **Create new** Server.
+###### Server detials 
+* Enter a unique **Server name**. 
+* Select **Location** geopraphically close to user location.
+###### Authentication 
+* For Authenticatioan method **Use SQL authentication**. 
+* Add **Server admin login** and secure **Password**.
+* Press **OK** to create SQL Database Server.
+###### Compute + Storage 
+* Select **Configure database**.
+* In Service tier, select **Basic (For less demanding workloads)**.
+* Press **Apply** to save service configuration.
+* Click **Review + create** to create the database.
+#### Azure Data Studio installation 
+* Nagivate to [Azure Data Studio website](https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio "https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio").
+* Find and download **Azure Data Studio user installer for Windows**.
+* Install Azure Data Studio using the on-screen instructions. 
+##### Azure Data Studio connection to local SQL server Database
+* Launch the **Azure Data Studio** application 
+* On the left taskbar, select **Connections** and then **New Connections**
+###### Connection Details of Local SQL server Database 
+* Connection type: Microsoft SQL Server 
+* Input type: Parameters 
+* Server: **localhost** or name of local SQL server database
+* Authentication type: Windows Authentication 
+* Database: \<Default\> or AdventureWorks2022
+    * Enable Trust server certificate when prompted
+* Encrypt: Mandatory (True)
+* Trust server certificate: True
+Server group: \<Default\>
+* Name (optional): Name of database or Leave blank
+* Click **Connect**
+##### Azure Data Studio connection to Azure SQL Database
+* Launch the **Azure Data Studio** application.
+* On the left taskbar, select **Connections** and then **New Connections**.
+###### Connection Details of Azure SQL Database
+* Connection type: Microsoft SQL Server
+* Input type: Parameters
+* Server: "user-server-name".database.windows.net
+    * Microsoft Azure > SQL databases > "User SQL database" > Overview
+    * Copy the server name.
+* Authentication type: SQL Login
+* User name: Server admin login
+* Password: Server admin password
+* Database: "User SQL database"
+* Encrypt: Mandatory (True)
+* Trust server certificate: True
+Server group: \<Default\>
+* Name (optional): Name of database or Leave blank 
+> [!NOTE] Edit Azure SQL Database Security before connecting 
+> * Microsoft Azure > SQL databases > "User SQL database" > Overview > Click "User SQL database server" > Left sidebar Security/Networking
+> * Enable **Selected Networks** to allow Virtual machine to connect to the server 
+
+* Click **Connect**

@@ -135,7 +135,28 @@ Server group: \<Default\>
 Server group: \<Default\>
 * Name (optional): Name of database or Leave blank 
 > [!NOTE] 
+> **Edit Azure SQL Database Security before connecting**
 > * Microsoft Azure > SQL databases > "User SQL database" > Overview > Click "User SQL database server" > Left sidebar Security/Networking
 > * Enable **Selected Networks** to allow Virtual machine to connect to the server 
 
 * Click **Connect**
+##### SQL Server Schema Compare
+###### Schema Extension
+* In Azure Studio Data Studio, find and click **Extension** icon in the left sidebar.
+* Search and install **SQL Server Schema Compare**.
+* Click on Connection icon in the left sidebar. 
+* Right click and choose **Schema Compare** on the **local database server**.
+###### Schema Compare 
+* Click on ... to open Source and Target prompt.
+  * Source
+    * Type: Database 
+    * Server: localhost (default) or "name of user server"
+    * Database: AdventureWorks2022
+  * Target 
+    * Type: Database 
+    * Server: "user-server-name".database.windows.net (Azure SQL Database server)
+    * Database: name of Azure SQL Database
+* Click on **Compare button** on the top left to initialise comparison.   
+* Click **Apply button** on the top middle to apply the difference from local database (virtual machine) to cloud database (Azure).
+> [!NOTE] 
+> This process only uploads the tables and structure of the database to the cloud **without the values or data**.

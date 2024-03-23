@@ -134,7 +134,7 @@ Server group: \<Default\>
 * Trust server certificate: True
 Server group: \<Default\>
 * Name (optional): Name of database or Leave blank 
-> [!NOTE] Edit Azure SQL Database Security before connecting 
+> [!NOTE] 
 > * Microsoft Azure > SQL databases > "User SQL database" > Overview > Click "User SQL database server" > Left sidebar Security/Networking
 > * Enable **Selected Networks** to allow Virtual machine to connect to the server 
 

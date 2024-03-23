@@ -222,3 +222,5 @@ Server group: \<Default\>
 * In **Migrations tab**, a new row will show the migration services and status. 
 * The migration status will show **Succeeded** when completed. 
 #### Migration data validation
+* Ensure that the data from the local database in the virtual matches the database in the Azure cloud database server.
+  * Systemically check that tables name and values have been migrated. 

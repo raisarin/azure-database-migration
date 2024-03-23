@@ -100,7 +100,7 @@ Sign up or log into your Azure Account using [Azure Portal](https://portal.azure
 ###### Database details 
 * Add appropriate **Database Name**. 
 * Click **Create new** Server.
-###### Server detials 
+###### Server details
 * Enter a unique **Server name**. 
 * Select **Location** geopraphically close to user location.
 ###### Authentication 
@@ -193,8 +193,8 @@ Server group: \<Default\>
 * Step 4: Azure SQL target 
   * Azure account: "User Azure account" 
     * Link user account and follow authentication process.
-  > [!Note] 
-  > The following details in the next step should be filled automatically ensure they are correct. 
+ > [!Note] 
+ > The following details in the next step should be filled automatically ensure they are correct.
   * Subscription: Choose relevant subcription of the database
   * Location: Location of the database 
   * Resource group: Group linked to database 

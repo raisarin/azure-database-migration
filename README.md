@@ -11,6 +11,7 @@ This UML Diagram provides a visual aid for understanding the flowchart of the pr
 ## Azure Account Setup
 Sign up or log into your Azure Account using [Azure Portal](https://portal.azure.com/ "https://portal.azure.com/")
 
+
 ## Production Environment Setup
 > [!Important]
 > The following set up is only for Windows 10 environment only and leave options as default if not mentioned.

@@ -1,33 +1,36 @@
-# Azure Database Migration
+# Azure Database Migration </h1>
 Implementation of a cloud-based database system using the services from Micosoft Azure.
-<details>
-<summary><h1> Table of Content</h1></summary>
-+ dkjfskd
-__dlfjsdlkfj
-</details>
 
-## Description 
+## Table of Content
+* [Description](#description)
+* [Azure Project Diagram](#azure-project-diagram)
+* [Azure Account Setup](#azure-account-setup)
+* [Production Environment Setup](#production-environment-setup)
+* [Azure SQL Database Migration](#azure-sql-database-migration)
+* [Data Backup and Restore](#data-backup-and-restore)
+* [Disaster Recovery Simulation](#disaster-recovery-simulation)
+* [Geo Replication and Failover](#geo-replication-and-failover)
+* [Microsoft Entra Directory Integration](#microsoft-entra-directory-integration)
+
+## Description
 Micosoft Azure provides plentiful and simple to use features. Virtual machine (VM) can be used to establish a production environment, the properties of the VM configured to meet the specification needs of the user. In the VM, application from Micosoft faciliate the migration, backups and restoration of on-premise SQL database. There are simulations that user can perform to verify the integrity and recovery features of on-presmise and cloud database. This project aims to produce a cloud-base database and test the core features provided.
 
 ## Azure Project Diagram 
 ![image](./Images/Azure%20Project%20Diagram.png)
-This UML Diagram provides a visual aid for understanding the flowchart of the project as there will multiple interdependent serivces. 
-## Milestone 
-### Azure Account Setup/Login
+This UML Diagram provides a visual aid for understanding the flowchart of the project as there will be multiple interdependent serivces. 
+
+## Azure Account Setup
 Sign up or log into your Azure Account using [Azure Portal](https://portal.azure.com/ "https://portal.azure.com/")
 
-### Milestone 2: Setup production environment
-> [!NOTE]
+## Production Environment Setup
+> [!Important]
 > The following set up is only for Windows 10 environment only and leave options as default if not mentioned.
-
-#### Windows Virtual Machine setup 
-##### Virtual machine dashboard
+### Windows Virtual Machine setup 
+#### Virtual machine dashboard
 * In the search menu type and select **Virtual Machines**.
 * Use create drop menu and choose **Azure virtual machine**. 
-
-##### Create virtual machine 
-###### Project 
-
+#### Create virtual machine 
+##### Project 
 * Select appropriate **Subscription**.
 * Create and name new **Resource Group**. 
 ###### Instance details
@@ -85,7 +88,7 @@ Sign up or log into your Azure Account using [Azure Portal](https://portal.azure
 * In Restore Database window, **select Device** then **click ...** for more options 
 * In Select backup devices window, **find and select backup file** in the previously saved file location.
 * **Press OK** to initilise the restore process, press OK again when prompted.
-### Milestone 3: Migrate to Azure SQL Database
+## Azure SQL Database Migration
 #### Azure SQL Database set up
 ##### SQL databases dashboard
 * Log in to your **Microsoft Azure Portal**. 
@@ -150,7 +153,6 @@ Server group: \<Default\>
 > **Edit Azure SQL Database Security before connecting**
 > * Microsoft Azure > SQL databases > "User SQL database" > Overview > Click "User SQL database server" > Left sidebar Security/Networking
 > * Enable **Selected Networks** to allow Virtual machine to connect to the server 
-
 * Click **Connect**
 ##### SQL Server Migration
 ###### Schema Extension
@@ -193,7 +195,6 @@ Server group: \<Default\>
     * Link user account and follow authentication process.
   > [!Note] 
   > The following details in the next step should be filled automatically ensure they are correct. 
-
   * Subscription: Choose relevant subcription of the database
   * Location: Location of the database 
   * Resource group: Group linked to database 
@@ -236,7 +237,8 @@ Server group: \<Default\>
 #### Migration data validation
 * Ensure that the data from the local database in the virtual matches the database in the Azure cloud database server.
   * Systemically check that tables name and values have been migrated. 
-### Milestone 4: Data Backup and Restore
+
+## Data Backup and Restore
 #### On-premise Database Backup 
 ##### Virtual Machine Backup 
 * Launch the **SQL Server Mangement Studio application (SSMS)**.
@@ -353,7 +355,8 @@ Server group: \<Default\>
 * Right click and click **refresh Maintenance Plans**
   * New a plan will appear.
 * Right click "User plan" and select **Exectue**
-### Milestone 5: Disaster Recovery Simulation 
+
+### Disaster Recovery Simulation
 #### Production Environment Data Loss Testing
 * Follow instructions on [Azure Data Studio installation](#azure-data-studio-installation) to download and install Azure Data Studio.
 * Follow instructions on [Azure Data Studio connection to Azure SQL Database](#azure-data-studio-connection-to-azure-sql-database) to connect to Azure SQL Database.
@@ -384,8 +387,9 @@ Server group: \<Default\>
 * After the deployment is completed, in resources, a **new database is created**
 * Following instructions on [Azure Data Studio connection to Azure SQL Database](#azure-data-studio-connection-to-azure-sql-database) again to connect to new restored Azure SQL Database.
 * Check that the tables that the loss was performed have been recovered properly.
-### Milestone 6: Geo Replication and Failover
-#### Geo replciation Configuation 
+
+### Geo Replication and Failover
+#### Geo replication Configuation 
 * Navigate to Azure portal > SQL Database
 * Select **Previously Restored database**
 * Under Data management, Click **Replicas**
@@ -425,7 +429,8 @@ Server group: \<Default\>
       * Press **Failover icon**
       * Press **Yes** in the Warning
       * Observe the Roles of the Servers are reverted to the original.
-### Milestone 7: Microsoft Entra Directory Integration
+
+### Microsoft Entra Directory Integration
 #### Configuration of Microsoft Entra ID for Azure SQL Database
 * Navigate to Azure portal > SQL server
 * Click **Primary database server**

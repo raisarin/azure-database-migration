@@ -1,4 +1,4 @@
-# Azure Database Migration </h1>
+# Azure Database Migration
 Implementation of a cloud-based database system using the services from Micosoft Azure.
 
 ## Table of Content
@@ -25,40 +25,38 @@ Sign up or log into your Azure Account using [Azure Portal](https://portal.azure
 ## Production Environment Setup
 > [!Important]
 > The following set up is only for Windows 10 environment only and leave options as default if not mentioned.
-### Windows Virtual Machine setup 
+### Windows Virtual Machine setup
 #### Virtual machine dashboard
 * In the search menu type and select **Virtual Machines**.
 * Use create drop menu and choose **Azure virtual machine**. 
-#### Create virtual machine 
-##### Project 
+#### Create virtual machine
 * Select appropriate **Subscription**.
 * Create and name new **Resource Group**. 
-###### Instance details
+#### Instance details
 * Add appropriate **Virtual Name**. 
 * Select **Region** geopraphically close to user location.
 * Select **Image** as **Windows 11 Pro** for this project. 
 * Choose **Size** as **B2ms** Standard or General Purpose. 
   * If not found in the drop down menu, click **See all sizes** and find in **B-Series**.
-###### Administrator account
+#### Administrator account
 * Add **Username** and secure **Password**.
-###### Inbound port rules
+#### Inbound port rules
 * In **Public inbound ports** select **Allow selected ports**. This allows select inbound ports to be chosen. 
 * For **Select inbound ports** check the option **RDP (3389)**. 
-###### Licensing 
+#### Licensing 
 * Check the box to confirm eligibility for windows 10/11 license with multi-tenant hosting rights.
-##### Finalising virtual machine 
+#### Finalising virtual machine 
 * Select **Review + Create** to initialise validation. 
 * Select **Create** button after validation has passed. 
 * A new page will appear once the deployment of the virtual machine is complete.
-
-#### Connecting to Windows Virtual Machine
-###### Connection set up in Azure portal
+### Windows Virtual Machine Connection
+#### Connection set up in Azure portal
 * In the search menu type and select **Virtual Machines**.
 * Select the name of **Virtual Machine** that has been created.
 * Press **Start** if the virtual machine has not been initialised.
 * Use the connect drop down menu to select **Connect**.
 * **Download RDP file** into local desktop.
-###### Connection in Windows desktop
+#### Connection in Windows desktop
 * Search for **Remote Desktop Connection** in Start menu of the local desktop.
 * Drag and drop **.rdp** file into the Remote Desktop Connection application. 
 * Input the **credentials** of the virtual machine to gain access.
@@ -80,7 +78,7 @@ Sign up or log into your Azure Account using [Azure Portal](https://portal.azure
     * Server name: "Name of virtual machine" or **Localhost**
     * Authentication: **Windows Authentication**
 * Press **Connect** to add the database to the Object Explorer.  
-#### Create production database 
+### Create production database 
 * Download Micorsoft SQL Server database backup file called [AdventureWorks](https://aicore-portal-public-prod-307050600709.s3.eu-west-1.amazonaws.com/project-files/93dd5a0c-212d-48eb-ad51-df521a9b4e9c/AdventureWorks2022.bak "https://aicore-portal-public-prod-307050600709.s3.eu-west-1.amazonaws.com/project-files/93dd5a0c-212d-48eb-ad51-df521a9b4e9c/AdventureWorks2022.bak").
 * Copy the backup file to file location `C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup`. 
 * Right click on **Databases**. 
@@ -88,14 +86,15 @@ Sign up or log into your Azure Account using [Azure Portal](https://portal.azure
 * In Restore Database window, **select Device** then **click ...** for more options 
 * In Select backup devices window, **find and select backup file** in the previously saved file location.
 * **Press OK** to initilise the restore process, press OK again when prompted.
+
 ## Azure SQL Database Migration
-#### Azure SQL Database set up
-##### SQL databases dashboard
+### Azure SQL Database set up
+#### SQL databases dashboard
 * Log in to your **Microsoft Azure Portal**. 
 * In the search menu type and select **SQL databases**.
 * Select **Create** a new database. 
-##### Create SQL Database 
-###### Project details 
+#### Create SQL Database 
+##### Project details 
 * Select appropriate **Subscription**.
 * Create and name new **Resource Group**. 
 ###### Database details 
@@ -113,18 +112,19 @@ Sign up or log into your Azure Account using [Azure Portal](https://portal.azure
 * In Service tier, select **Basic (For less demanding workloads)**.
 * Press **Apply** to save service configuration.
 * Click **Review + create** to create the database.
-#### Azure Data Studio installation 
+### Migration preparation
+#### Azure Data Studio installation
 * Nagivate to [Azure Data Studio website](https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio "https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio").
 * Find and download **Azure Data Studio user installer for Windows**.
-* Install Azure Data Studio using the on-screen instructions. 
-##### Azure Data Studio connection to local SQL server Database
-* Launch the **Azure Data Studio** application 
-* On the left taskbar, select **Connections** and then **New Connections**
-###### Connection Details of Local SQL server Database 
-* Connection type: Microsoft SQL Server 
-* Input type: Parameters 
+* Install Azure Data Studio using the on-screen instructions.
+#### Azure Data Studio to local SQL server Database connection
+* Launch the **Azure Data Studio** application.
+* On the left taskbar, select **Connections** and then **New Connections**.
+##### Connection Details of Local SQL server Database
+* Connection type: Microsoft SQL Server
+* Input type: Parameters
 * Server: **localhost** or name of local SQL server database
-* Authentication type: Windows Authentication 
+* Authentication type: Windows Authentication
 * Database: \<Default\> or AdventureWorks2022
     * Enable Trust server certificate when prompted
 * Encrypt: Mandatory (True)
@@ -132,10 +132,10 @@ Sign up or log into your Azure Account using [Azure Portal](https://portal.azure
 Server group: \<Default\>
 * Name (optional): Name of database or Leave blank
 * Click **Connect**
-##### Azure Data Studio connection to Azure SQL Database
+### Azure Data Studio to Azure SQL Database Connection
 * Launch the **Azure Data Studio** application.
 * On the left taskbar, select **Connections** and then **New Connections**.
-###### Connection Details of Azure SQL Database
+#### Connection Details of Azure SQL Database
 * Connection type: Microsoft SQL Server
 * Input type: Parameters
 * Server: "user-server-name".database.windows.net
@@ -147,42 +147,42 @@ Server group: \<Default\>
 * Database: "User SQL database"
 * Encrypt: Mandatory (True)
 * Trust server certificate: True
-Server group: \<Default\>
+* Server group: \<Default\>
 * Name (optional): Name of database or Leave blank 
 > [!NOTE] 
 > **Edit Azure SQL Database Security before connecting**
 > * Microsoft Azure > SQL databases > "User SQL database" > Overview > Click "User SQL database server" > Left sidebar Security/Networking
 > * Enable **Selected Networks** to allow Virtual machine to connect to the server 
 * Click **Connect**
-##### SQL Server Migration
-###### Schema Extension
+### Schema Migration
+#### Schema Extension
 * In Azure Studio Data Studio, find and click **Extensions** icon in the left sidebar.
 * Search and install **SQL Server Schema Compare**.
-* Click on Connection icon in the left sidebar. 
+* Click on Connection icon in the left sidebar.
 * Right click and choose **Schema Compare** on the **local database server**.
-###### Schema Compare 
+#### Schema Compare
 * Click on ... to open Source and Target prompt.
   * Source
-    * Type: Database 
+    * Type: Database
     * Server: localhost (default) or "name of user server"
     * Database: AdventureWorks2022
   * Target 
-    * Type: Database 
+    * Type: Database
     * Server: "user-server-name".database.windows.net (Azure SQL Database server)
     * Database: name of Azure SQL Database
-* Click on **Compare button** on the top left to initialise comparison.   
-* Click **Apply button** on the top middle to apply the difference from local database (virtual machine) to cloud database (Azure).
+* Click on **Compare button** on the top left to initialise comparison.
+* Click **Apply button** on the top middle to apply the difference from local database(virtual machine) to cloud database (Azure).
 > [!Important] 
 > This process only uploads the tables and structure of the database to the cloud **without the values or data**.
-#### SQL Data Migration
-##### Data Migration extension 
+### Data Migration
+#### Data Migration extension 
 * In Azure Studio Data Studio, find and click **Extensions** icon in the left sidebar.
 * Search and install **Azure SQL Migration**.
 * Click on Connection icon in the left sidebar. 
 * Right click and choose **Manage** on the **local database server**.
 * In the new windows, under General click **Azure SQL Migration**.
 * Click **Migrate to Azure SQL** 
-##### Migrate "user database" to Azure SQL
+#### Local Database to Azure SQL Migration
 * Step 1: Databases for assessment
   * Choose **AdventureWorks2022** Database. 
   * Click next.
@@ -210,37 +210,37 @@ Server group: \<Default\>
     * Create Azure Database Migration Service
       * Resource group: Click **Create new** under Resource group and **add appropriate name**
       * Name: Add **Service Name**
-  * Set up integration runtime 
+  * Set up integration runtime
     * Use the link provided to **download and install** the Mircosoft Integration Runtime Configuration Manager.
     * Run the applicaiton.
-    * Copy and paste one of the Authentication key in the Register Integration Runtime. (Self-hosted) window 
-    * Click **Register** button. 
+    * Copy and paste one of the Authentication key in the Register Integration Runtime. (Self-hosted) window
+    * Click **Register** button.
       * "Self-hosted node is connected to the could service" will be shown in the window.
     * Click **Test connection** button on the bottom right to verify connection. 
     * Click **Done** button to return to previous window interface.
   * Connection status: Text box will show the connection of the service.
-    * Press **Refresh** button to retry the connection. 
-  * Press **Next** button. 
-* Step 6: Data source configuration 
+    * Press **Refresh** button to retry the connection.
+  * Press **Next** button.
+* Step 6: Data source configuration
   * User name: "Virtual machine\User"
   * Password: "Virtual machine credentials"
   * Table selection: Check the source and target database are correct
     * Click the box under the select tables to edit number of tables.
     * Select the necessary number of tables
-    * Press **Update** button the bottom right. 
-  * Press **Run validation** button on the bottom left to test the connectivity. 
+    * Press **Update** button the bottom right.
+  * Press **Run validation** button on the bottom left to test the connectivity.
     * After the validation process has finish, press **Done**
-  * Click on **Next** button. 
-  * Press **Start migration** button. 
-* In **Migrations tab**, a new row will show the migration services and status. 
-* The migration status will show **Succeeded** when completed. 
-#### Migration data validation
+  * Click on **Next** button.
+  * Press **Start migration** button.
+* In **Migrations tab**, a new row will show the migration services and status.
+* The migration status will show **Succeeded** when completed.
+### Migration data validation
 * Ensure that the data from the local database in the virtual matches the database in the Azure cloud database server.
   * Systemically check that tables name and values have been migrated. 
 
 ## Data Backup and Restore
-#### On-premise Database Backup 
-##### Virtual Machine Backup 
+### On-premise Database Backup 
+#### Virtual Machine Backup 
 * Launch the **SQL Server Mangement Studio application (SSMS)**.
 * In Object Explorer, connect to **Localhost database server**. 
 * Right click the local database.
@@ -256,29 +256,29 @@ Server group: \<Default\>
       * This is the default path for backup file in windows.
   * Press OK to execute backup
  * A new window will appear to show "T**he backup of database 'AdventureWorks2022' completed successfully.**"
-##### User Local Machine Backup 
+#### User Local Machine Backup 
 * In the virtual machine, use the file explorer application to **navigate to the Backup file**. 
   * Or copy paste the path way into the Windows Search bar to find the file folder 
 * Right click and copy the file **"AdventureWorks2022.bak"**
 * Minimise the virual machine using the "_" icon at the top to return to user local machine. 
 * **Paste backup** file in a secure file location.
-#### Blob Storage Backup
-##### Storage accounts dashboard
+### Blob Storage Backup
+#### Storage accounts dashboard
 * Log in to your **Microsoft Azure Portal**. 
 * In the search menu type and select **storage accounts**.
-###### Project details 
+##### Project details 
 * Select appropriate **Subscription**.
 * Create new **Resource Group**.
-###### Instance details 
+##### Instance details 
 * Storage account name: "Relevant name"
 * Region: Closest to user location
 * Performance: Standard 
 * Redundancy: Geo-redundant storage (GRS)
 * Press review 
-###### Review 
+##### Review 
 * Preview the details and scroll down 
 * Click **Create** 
-###### Upload backup to new container 
+#### Upload backup to new container 
 * **Navigate** Storage accounts > "Storage account name" > Overview > Upload 
 * Upload blob 
   * **Copy and drag the backup file** from the backup folder in the virtual machine to the drop window 
@@ -287,7 +287,7 @@ Server group: \<Default\>
     * Anonymous access level: **Private (no anonymous access)**
     * Click **Ok**
   * **Upload** backup file to cloud.
-###### Restore Database on Development Environment 
+### Restore Database on Development Environment 
 * Using the previous instructions create a new following environments: 
   * Virtual Machine: Sandbox environment for testing feature
   * In Sadbox virtual machine:
@@ -297,67 +297,69 @@ Server group: \<Default\>
   * Right click and download to Sandbox windows into the SSM backup folder.
   * Use the same process as before in **Create production database** to restore the database.
   * Check the tables and data have been restored properly. 
-###### Development Environment Automated Backup
+### Development Environment Automated Backup
 * Launch **SSMS** application. 
 * In object Explorer, under Integration Services Catalogs, right click **SQL Server Agent (Agent XPs disbale)
 * Click **start** and **Yes** to start service. 
-* SQL Server Credential creation
-  * **Right click the server** in Object Explorer 
-  * Select **New Query**
-  * Copy and paste the code block below 
-  ``` 
-  CREATE CREDENTIAL YourCredentialName
-  WITH IDENTITY = 'Your Azure Storage Account Name',
-  SECRET = 'Access Key';
-  ```
-  * **Replace the following details** using information from the Azure storage details 
-    * Navigate to Azure portal > Storage accounts > "User storage account" > Security + networking > Access Keys
-    * YourCredentialName: "Name of backup"
-    * Your Azure Storage Account Name: "Copy and paste Storage account name"
-    * Access key: "Copy and paste Key"
-  * **Right Click then press Execute** on the code in SSMS
-    * A prompt will show "Commands completed successfully."
-    * In object Explorer > "User server" > Security > Credentials, the credential created will be present. 
+#### SQL Server Credential creation
+* **Right click the server** in Object Explorer 
+* Select **New Query**
+* Copy and paste the code block below 
+``` 
+CREATE CREDENTIAL YourCredentialName
+WITH IDENTITY = 'Your Azure Storage Account Name',
+SECRET = 'Access Key';
+```
+* **Replace the following details** using information from the Azure storage details
+  * Navigate to Azure portal > Storage accounts > "User storage account" > Security + networking > Access Keys
+  * YourCredentialName: "Name of backup"
+  * Your Azure Storage Account Name: "Copy and paste Storage account name"
+  * Access key: "Copy and paste Key"
+* **Right Click then press Execute** on the code in SSMS
+  * A prompt will show "Commands completed successfully."
+  * In object Explorer > "User server" > Security > Credentials, the credential created will be present. 
+#### Maintence Plan
 * In Object Explorer then Management, **Right click Maintenance Plan**. 
 * Select Maintence Plan Wizard.
-  * Information page, press next.
-  * Select Plan Properties
-    * Name: "Name of Maintenance Plan"
-    * Description: "Blank" 
-    * Run as: SQL Server Agent service account 
-    * Single schedule for the entire plan or no schedule 
-    * Schedule: Press Change 
-      * New job Schedule
-        * Schedule type: Recurring 
-        * Frequnecy Occurs: Weekly
-        * Press OK 
+##### Maintence Plan Wizard
+* In information page, press next.
+* Select Plan Properties
+  * Name: "Name of Maintenance Plan"
+  * Description: "Blank" 
+  * Run as: SQL Server Agent service account 
+  * Single schedule for the entire plan or no schedule 
+  * Schedule: Press Change 
+    * New job Schedule
+      * Schedule type: Recurring 
+      * Frequnecy Occurs: Weekly
+      * Press OK 
+  * Press **Next >**
+* Select Maintenance Tasks 
+  * Select Back Up Database (Full)
+  * Press **Next >**
+* Select Maintenance Task Order 
+  * Select Back Up Database (Full)
+  * Press **Next >**
+* Define Back Up Database (Full) Task 
+  * General
+    * Database(s): AdventureWorks2022 
+    * Back up to: URL
+  * Destination: 
+    * SQL credential: "User created Credential" 
+    * Azure storage container: "Container in the user storage account"
+      * Azure portal > Storage accounts > "user storage account" > Data storage > Containers > "Container for backup" 
     * Press **Next >**
-  * Select Maintenance Tasks 
-    * Select Back Up Database (Full)
-    * Press **Next >**
-  * Select Maintenance Task Order 
-    * Select Back Up Database (Full)
-    * Press **Next >**
-  * Define Back Up Database (Full) Task 
-    * General
-      * Database(s): AdventureWorks2022 
-      * Back up to: URL
-    * Destination: 
-      * SQL credential: "User created Credential" 
-      * Azure storage container: "Container in the user storage account"
-        * Azure portal > Storage accounts > "user storage account" > Data storage > Containers > "Container for backup" 
-      * Press **Next >**
-  * Select Report Options: 
-    * Press **Next >**
-  * Complete the Wizard 
-    * Press **Finish**
-  * Press Close when Status has updated to Success.
+* Select Report Options: 
+  * Press **Next >**
+* Complete the Wizard 
+  * Press **Finish**
+* Press Close when Status has updated to Success.
 * Right click and click **refresh Maintenance Plans**
-  * New a plan will appear.
+* New a plan will appear.
 * Right click "User plan" and select **Exectue**
 
-### Disaster Recovery Simulation
-#### Production Environment Data Loss Testing
+## Disaster Recovery Simulation
+### Production Environment Data Loss Testing
 * Follow instructions on [Azure Data Studio installation](#azure-data-studio-installation) to download and install Azure Data Studio.
 * Follow instructions on [Azure Data Studio connection to Azure SQL Database](#azure-data-studio-connection-to-azure-sql-database) to connect to Azure SQL Database.
 * In the Azure Data Studio, servers > Tables. 
@@ -377,7 +379,7 @@ Server group: \<Default\>
   * Change **TABLE_NAME** and **TABLE_COLUM_NAME** to match your table.
 * Right click and select **Select Top 1000** to observer the data loss.
 * **Record** the loss of the data for verfication when performing recovery.
-#### Azure SQL Database Backup Restoration 
+### Azure SQL Database Backup Restoration 
 * Navigate to Azure Portal > SQL databases > "SQL database"
 * Select **Restore** icon. 
   * Create SQL Database - Restore database
@@ -388,27 +390,27 @@ Server group: \<Default\>
 * Following instructions on [Azure Data Studio connection to Azure SQL Database](#azure-data-studio-connection-to-azure-sql-database) again to connect to new restored Azure SQL Database.
 * Check that the tables that the loss was performed have been recovered properly.
 
-### Geo Replication and Failover
-#### Geo replication Configuation 
+## Geo Replication and Failover
+### Geo replication Configuation 
 * Navigate to Azure portal > SQL Database
 * Select **Previously Restored database**
 * Under Data management, Click **Replicas**
 * Click **Create relica**
-  * Create SQL Database - Geo Replica
-    * Database details 
-      * Server: Click **Create new**
-        * Create SQL Database Server
-          * Server name: **Unique server name**
-          * Location: **Different from original server**
-          * Authentication method: Use SQL authentication 
-          * Server admin login: **New credentials**
-          * Password: **New credentials**
-          * Confirm password: **New credentials**
-          * Press **Review + create**
-        * Press **Create**
-
-#### Failover and Failback Test
-##### Failover group setup 
+#### Geo Replica
+* Create SQL Database - Geo Replica
+* Database details 
+  * Server: Click **Create new**
+    * Create SQL Database Server
+      * Server name: **Unique server name**
+      * Location: **Different from original server**
+      * Authentication method: Use SQL authentication 
+      * Server admin login: **New credentials**
+      * Password: **New credentials**
+      * Confirm password: **New credentials**
+      * Press **Review + create**
+    * Press **Create**
+### Failover and Failback Test
+#### Failover group setup 
 * Navigate to Azure portal > SQL server
 * Select **Server with Restored database** 
 * Under Data management, select **Failover groups**
@@ -416,7 +418,7 @@ Server group: \<Default\>
   * Failover group
     * Failover group name: **New group name**
     * Server: **Select Secondary server**
-##### Testing
+#### Test
 * Newly added group will appear in the Failover groups
 * Click on the **New Failover group**
   * New Failover group 
@@ -430,8 +432,8 @@ Server group: \<Default\>
       * Press **Yes** in the Warning
       * Observe the Roles of the Servers are reverted to the original.
 
-### Microsoft Entra Directory Integration
-#### Configuration of Microsoft Entra ID for Azure SQL Database
+## Microsoft Entra Directory Integration
+### Azure SQL Database Microsoft Entra ID Configuration
 * Navigate to Azure portal > SQL server
 * Click **Primary database server**
 * Under Settings, click **Microsoft Entra ID**
@@ -441,8 +443,8 @@ Server group: \<Default\>
     * Check the User
     * Click **Select** button
 * Click **Save**
-* Under Microsoft Entra admin, the added admin details will appear 
-#### Testing Microsoft Entra ID 
+* Under Microsoft Entra admin, the added admin details will appear.
+#### Microsoft Entra ID Testing
 * In **Production virtual machine**, launch **Azure Data Studio**
 * Add new connection
   * Connection type: Microsoft SQL Server
@@ -460,8 +462,8 @@ Server group: \<Default\>
   Server group: \<Default\>
   * Name (optional): Name of database or Leave blank
 * Verfiy the tables and data can be access.
-#### DB Reader User
-##### Creating User Access
+### DB Reader User
+#### New user Creation
 * Navigate to Azure portal > Microsoft Entra ID
 * Click add user > Create new user
   * Create new user
@@ -473,6 +475,7 @@ Server group: \<Default\>
       * Account enabled: Checked
   * Press **Review + create**
   * Click **Create**
+#### New User Acess Configuration
 * Launch Azure Data Studio in production virtual machine 
 * Using the instructions in [Testing Microsoft Entra ID](#testing-microsoft-entra-id) with the admin credentials to gain access to the database.
 * Right click the database server.
@@ -486,7 +489,7 @@ ALTER ROLE db_datareader ADD MEMBER[new_user@yourdomain.com];
 ```
 * Press **Run** icon
 * Message will show that "Commands completed successfully."
-#### Test User Access
+#### New User Access Testing
 * In the same connection, Right click the server
 * Click **Edit Connection**
 * Only change account field

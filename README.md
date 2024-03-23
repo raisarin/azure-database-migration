@@ -249,7 +249,7 @@ Server group: \<Default\>
 * Right click and copy the file **"AdventureWorks2022.bak"**
 * Minimise the virual machine using the "_" icon at the top to return to user local machine. 
 * **Paste backup** file in a secure file location.
-### Blob Storage Backup
+#### Blob Storage Backup
 ##### Storage accounts dashboard
 * Log in to your **Microsoft Azure Portal**. 
 * In the search menu type and select **storage accounts**.
@@ -342,3 +342,34 @@ Server group: \<Default\>
 * Right click and click **refresh Maintenance Plans**
   * New a plan will appear.
 * Right click "User plan" and select **Exectue**
+### Milestone 5: Disaster Recovery Simulation 
+#### Production Environment Data Loss Testing
+* Follow instructions on [Azure Data Studio installation](#azure-data-studio-installation) to download and install Azure Data Studio.
+* Follow instructions on [Azure Data Studio connection to Azure SQL Database](#azure-data-studio-connection-to-azure-sql-database) to connect to Azure SQL Database.
+* In the Azure Data Studio, servers > Tables. 
+* **Choose any table** to edit the values to micic data loss manually. 
+* or Use the following method to alter tables. 
+  * Right click **Server** and select **New Query** 
+  * Use the following code to edit more data values. 
+  ```
+  -- Intentional Deletion
+  DELETE TOP (100)
+  FROM TABLE_NAME;
+
+  -- Data Corruption
+  UPDATE TOP (100) TABLE_NAME
+  SET TABLE_COLUMN_NAME = NULL
+  ```
+  * Change **TABLE_NAME** and **TABLE_COLUM_NAME** to match your table.
+* Right click and select **Select Top 1000** to observer the data loss.
+* **Record** the loss of the data for verfication when performing recovery.
+#### Azure SQL Database Backup Restoration 
+* Navigate to Azure Portal > SQL databases > "SQL database"
+* Select **Restore** icon. 
+  * Create SQL Database - Restore database
+    * Restore point (UTC): Choose time before the data loss testing 
+    * Database name: "Choose appropriate name"
+    * Click **Review + Create** then **Create**
+* After the deployment is completed, in resources, a **new database is created**
+* Following instructions on [Azure Data Studio connection to Azure SQL Database](#azure-data-studio-connection-to-azure-sql-database) again to connect to new restored Azure SQL Database.
+* Check that the tables that the loss was performed have been recovered properly.
